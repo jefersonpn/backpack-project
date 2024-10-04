@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a9d8044f4fa1c641b38f762238104ae",
+    "content-hash": "882a1e6af54ac9fa5c659dccf177f2ef",
     "packages": [
         {
             "name": "backpack/basset",
@@ -175,17 +175,17 @@
             "time": "2024-09-20T10:00:30+00:00"
         },
         {
-            "name": "backpack/theme-coreuiv2",
-            "version": "1.2.5",
+            "name": "backpack/theme-tabler",
+            "version": "1.2.13",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Laravel-Backpack/theme-coreuiv2.git",
-                "reference": "e1bddfe5a43171fc5ac358906d27f331b1640d8c"
+                "url": "https://github.com/Laravel-Backpack/theme-tabler.git",
+                "reference": "82303e72c82fcced5b48708e2208e439ec7317d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/theme-coreuiv2/zipball/e1bddfe5a43171fc5ac358906d27f331b1640d8c",
-                "reference": "e1bddfe5a43171fc5ac358906d27f331b1640d8c",
+                "url": "https://api.github.com/repos/Laravel-Backpack/theme-tabler/zipball/82303e72c82fcced5b48708e2208e439ec7317d3",
+                "reference": "82303e72c82fcced5b48708e2208e439ec7317d3",
                 "shasum": ""
             },
             "require": {
@@ -197,15 +197,18 @@
             },
             "type": "library",
             "extra": {
+                "branch-alias": {
+                    "dev-main": "1.0.x-dev"
+                },
                 "laravel": {
                     "providers": [
-                        "Backpack\\ThemeCoreuiv2\\AddonServiceProvider"
+                        "Backpack\\ThemeTabler\\AddonServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Backpack\\ThemeCoreuiv2\\": "src/"
+                    "Backpack\\ThemeTabler\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -214,65 +217,10 @@
             ],
             "authors": [
                 {
-                    "name": "Cristian Tabacitu",
-                    "email": "hello@backpackforlaravel.com",
+                    "name": "Mauro Martinez",
+                    "email": "maurohmartinez@gmail.com",
                     "homepage": "https://backpackforlaravel.com"
-                }
-            ],
-            "description": "UI that uses CoreUI v2 and Bootstrap v4, provided as a legacy theme for Backpack v6.",
-            "homepage": "https://github.com/backpack/theme-coreuiv2",
-            "keywords": [
-                "Backpack Addon",
-                "Backpack for Laravel",
-                "ThemeCoreuiv2",
-                "backpack",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/Laravel-Backpack/theme-coreuiv2/issues",
-                "source": "https://github.com/Laravel-Backpack/theme-coreuiv2/tree/1.2.5"
-            },
-            "time": "2024-07-15T07:57:25+00:00"
-        },
-        {
-            "name": "backpack/theme-coreuiv4",
-            "version": "1.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Laravel-Backpack/theme-coreuiv4.git",
-                "reference": "c6f2befe9c23d1f05b76367c009f0b935008c811"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/theme-coreuiv4/zipball/c6f2befe9c23d1f05b76367c009f0b935008c811",
-                "reference": "c6f2befe9c23d1f05b76367c009f0b935008c811",
-                "shasum": ""
-            },
-            "require": {
-                "backpack/crud": "^6.2.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~5|~6",
-                "phpunit/phpunit": "~9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Backpack\\ThemeCoreuiv4\\AddonServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Backpack\\ThemeCoreuiv4\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
+                },
                 {
                     "name": "Cristian Tabacitu",
                     "email": "hello@backpackforlaravel.com",
@@ -282,27 +230,22 @@
                     "name": "Antonio Almeida",
                     "email": "promatik@gmail.com",
                     "homepage": "https://backpackforlaravel.com"
-                },
-                {
-                    "name": "Mauro Martinez",
-                    "email": "maurohmartinez@gmail.com",
-                    "homepage": "https://backpackforlaravel.com"
                 }
             ],
-            "description": "UI for Backpack v6 that uses CoreUI v4 and Bootstrap v5.",
-            "homepage": "https://github.com/backpack/theme-coreuiv4",
+            "description": "UI for Backpack v6 that uses Tabler and Bootstrap v5.",
+            "homepage": "https://github.com/backpack/theme-tabler",
             "keywords": [
                 "Backpack Addon",
                 "Backpack for Laravel",
-                "ThemeCoreuiv4",
+                "ThemeTabler",
                 "backpack",
                 "laravel"
             ],
             "support": {
-                "issues": "https://github.com/Laravel-Backpack/theme-coreuiv4/issues",
-                "source": "https://github.com/Laravel-Backpack/theme-coreuiv4/tree/1.1.2"
+                "issues": "https://github.com/Laravel-Backpack/theme-tabler/issues",
+                "source": "https://github.com/Laravel-Backpack/theme-tabler/tree/1.2.13"
             },
-            "time": "2024-07-15T07:58:20+00:00"
+            "time": "2024-09-06T13:24:48+00:00"
         },
         {
             "name": "brick/math",

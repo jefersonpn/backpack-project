@@ -18,8 +18,8 @@ return [
     // and choosing that view_namespace instead of the default one. Backpack will load a file from there
     // if it exists, otherwise it will load it from the fallback namespace.
 
-    'view_namespace' => 'backpack.theme-coreuiv2::',
-    'view_namespace_fallback' => 'backpack.theme-coreuiv2::',
+    'view_namespace' => 'backpack.theme-tabler::',
+    'view_namespace_fallback' => 'backpack.theme-tabler::',
 
     /*
     |--------------------------------------------------------------------------
@@ -73,10 +73,10 @@ return [
     // ------
 
     // Developer or company name. Shown in footer.
-    'developer_name' => 'Cristian Tabacitu',
+    'developer_name' => 'Jeferson Nascimento',
 
     // Developer website. Link in footer. Type false if you want to hide it.
-    'developer_link' => 'http://tabacitu.ro',
+    'developer_link' => 'https://www.linkedin.com/in/jefersonpn/',
 
     // Show powered by Laravel Backpack in the footer? true/false
     'show_powered_by' => true,
@@ -86,7 +86,7 @@ return [
     // ---------
 
     // Show "Getting Started with Backpack" info block?
-    'show_getting_started' => env('APP_ENV') == 'local',
+    'show_getting_started' => false,
 
     // -------------
     // GLOBAL STYLES
