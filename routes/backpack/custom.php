@@ -17,9 +17,12 @@ Route::group([
     'namespace' => 'App\Http\Controllers\Admin',
     'as' => 'admin.',
 ], function () { // custom admin routes
-    Route::crud('user', 'UserCrudController');
-})->name('user'); // this should be the absolute last line of this file
+    Route::crud('user', 'UserCrudController'); // Existing route
+
+    // Custom route for the dashboard
+    Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
+});
 
 /**
- * DO NOT ADD ANYTHING HERE.
+ * DO NOT ADD ANYTHING BELOW THIS LINE.
  */
