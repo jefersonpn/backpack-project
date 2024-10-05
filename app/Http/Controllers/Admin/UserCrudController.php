@@ -21,7 +21,7 @@ class UserCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,40 +33,73 @@ class UserCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
+        CRUD::setFromDb(); // Set columns from db columns.
 
-        /**
-         * Columns can be defined using the fluent syntax:
-         * - CRUD::column('price')->type('number');
-         */
+        // Remove the default type column added by setFromDb(), to add the custom type column
+        CRUD::removeColumn('type');
+
+        // Add a new type column with human-readable labels
+        CRUD::addColumn([
+            'name' => 'type',
+            'label' => 'User Type',
+            'type' => 'closure',
+            'function' => function($entry) {
+                switch ($entry->type) {
+                    case '1':
+                        return 'Superadmin';
+                    case '2':
+                        return 'Admin';
+                    case '3':
+                        return 'User';
+                    default:
+                        return 'Unknown';
+                }
+            },
+        ]);
     }
+
+
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
     protected function setupCreateOperation()
     {
         CRUD::setValidation(UserRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
+        CRUD::setFromDb(); // Set fields from db columns.
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
+        // Add the 'type' field to select from a list of user types.
+        CRUD::addField([
+            'name' => 'type',
+            'label' => 'User Type',
+            'type' => 'select_from_array',
+            'options' => [
+                '1' => 'Superadmin',
+                '2' => 'Admin',
+                '3' => 'User',
+            ],
+            'allows_null' => false,
+            'default' => '3', // Default value if needed
+        ]);
+
+        // Remove the default 'type' field if the user is not a superadmin.
+        if (!backpack_auth()->user()->isSuperAdmin()) {
+            CRUD::removeField('type');
+        }
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
@@ -74,4 +107,49 @@ class UserCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+    protected function setupShowOperation()
+    {
+        CRUD::setFromDb(); // Set fields from db columns.
+
+        // To customize the columns in the show blade, i needed to remove the column type, but removing it, the created at and updated at
+        // has been removed too i don't know why, so i added at the end.
+
+        // Remove the default 'type' column added by setFromDb()
+        CRUD::removeColumn('type');
+
+        // Add a new 'type' column with human-readable labels
+        CRUD::addColumn([
+            'name' => 'type',
+            'label' => 'User Type',
+            'type' => 'text',
+            'value' => function($entry) {
+                switch ($entry->type) {
+                    case '1':
+                        return 'Superadmin';
+                    case '2':
+                        return 'Admin';
+                    case '3':
+                        return 'User';
+                    default:
+                        return 'Unknown';
+                }
+            },
+        ]);
+
+        // Adding the column Created_at
+        CRUD::addColumn([
+            'name' => 'created_at',
+            'label' => 'Created At',
+            'type' => 'datetime',
+        ]);
+
+        // Adding the column Updated_at
+        CRUD::addColumn([
+            'name' => 'updated_at',
+            'label' => 'Updated At',
+            'type' => 'datetime',
+        ]);
+    }
+
 }
