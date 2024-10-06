@@ -16,8 +16,9 @@ Route::group([
     ),
     'namespace' => 'App\Http\Controllers\Admin',
     'as' => 'admin.',
-], function () { // custom admin routes
-    Route::crud('user', 'UserCrudController'); // Existing route
+], function () {
+    // Users crud
+    Route::crud('user', 'UserCrudController');
 
     // Custom route for the dashboard
     Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');

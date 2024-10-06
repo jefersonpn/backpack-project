@@ -27,8 +27,8 @@ class CheckIfAdmin
      */
     private function checkIfUserIsAdmin($user)
     {
-        // return ($user->is_admin == 1);
-        return true;
+        // Allow only users with type 1 (Superadmin) or 2 (Admin)
+        return in_array($user->type, ['1', '2']);
     }
 
     /**

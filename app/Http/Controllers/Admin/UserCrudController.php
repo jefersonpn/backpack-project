@@ -13,11 +13,28 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
  */
 class UserCrudController extends CrudController
 {
+    // If not backpack user type == 3, redirect to home
+    public function __construct()
+{
+    parent::__construct();
+
+    // Apply the superadmin middleware to ensure only superadmins can access this controller
+    $this->middleware(function ($request, $next) {
+        if (backpack_auth()->guest() || !backpack_auth()->user()->isSuperAdmin()) {
+            abort(404);
+        }
+
+        return $next($request);
+    });
+}
+
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+
+
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -63,8 +80,6 @@ class UserCrudController extends CrudController
             },
         ]);
     }
-
-
 
     /**
      * Define what happens when the Create operation is loaded.
