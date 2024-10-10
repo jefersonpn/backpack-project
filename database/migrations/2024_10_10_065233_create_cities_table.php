@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('code_ibge')->nullable()->unique();
+            $table->string('code_istat')->nullable()->unique();
             $table->foreignId('region_id')->nullable()->constrained('regions')->onDelete('cascade');
             $table->foreignId('state_id')->nullable()->constrained('states')->onDelete('cascade');
             $table->timestamps();

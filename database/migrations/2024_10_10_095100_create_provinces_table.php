@@ -4,28 +4,31 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateProvincesTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('states', function (Blueprint $table) {
+        Schema::create('provinces', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('code')->unique();
-            $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
+            $table->foreignId('region_id')->constrained('regions')->onDelete('cascade');
             $table->timestamps();
         });
-
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('states');
+        Schema::dropIfExists('provinces');
     }
-};
+}
