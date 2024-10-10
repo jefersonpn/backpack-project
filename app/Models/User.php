@@ -76,4 +76,19 @@ class User extends Authenticatable
     {
         return $this->type === self::TYPE_USER;
     }
+
+    public function getTypeLabelAttribute()
+    {
+        switch ($this->type) {
+            case '1':
+                return 'Superadmin';
+            case '2':
+                return 'Admin';
+            case '3':
+                return 'User';
+            default:
+                return 'Unknown';
+        }
+    }
+
 }

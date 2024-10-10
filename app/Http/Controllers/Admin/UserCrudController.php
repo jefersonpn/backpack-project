@@ -15,26 +15,29 @@ class UserCrudController extends CrudController
 {
     // If not backpack user type == 3, redirect to home
     public function __construct()
-{
-    parent::__construct();
+    {
+        parent::__construct();
 
-    // Apply the superadmin middleware to ensure only superadmins can access this controller
-    $this->middleware(function ($request, $next) {
-        if (backpack_auth()->guest() || !backpack_auth()->user()->isSuperAdmin()) {
-            abort(404);
-        }
+        // Apply the superadmin middleware to ensure only superadmins can access this controller
+        $this->middleware(function ($request, $next) {
+            if (
+                backpack_auth()->guest() ||
+                !backpack_auth()
+                    ->user()
+                    ->isSuperAdmin()
+            ) {
+                abort(404);
+            }
 
-        return $next($request);
-    });
-}
+            return $next($request);
+        });
+    }
 
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
-
-
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -61,23 +64,16 @@ class UserCrudController extends CrudController
         // Remove the default type column added by setFromDb(), to add the custom type column
         CRUD::removeColumn('type');
 
-        // Add a new type column with human-readable labels
+        // Add a new 'type' column with human-readable labels
         CRUD::addColumn([
             'name' => 'type',
             'label' => 'User Type',
-            'type' => 'closure',
-            'function' => function($entry) {
-                switch ($entry->type) {
-                    case '1':
-                        return 'Superadmin';
-                    case '2':
-                        return 'Admin';
-                    case '3':
-                        return 'User';
-                    default:
-                        return 'Unknown';
-                }
-            },
+            'type' => 'select_from_array',
+            'options' => [
+                '1' => 'Superadmin',
+                '2' => 'Admin',
+                '3' => 'User',
+            ],
         ]);
     }
 
@@ -130,27 +126,21 @@ class UserCrudController extends CrudController
         // To customize the columns in the show blade, i needed to remove the column type, but removing it, the created at and updated at
         // has been removed too i don't know why, so i added at the end.
 
-        // Remove the default 'type' column added by setFromDb()
-        CRUD::removeColumn('type');
-
-        // Add a new 'type' column with human-readable labels
+        // Add a new 'type' column with human-readable labels using a closure
+        // Created this custom column to see the right label of the user type, not the default one which a removed -> CRUD::removeColumn('type');
         CRUD::addColumn([
-            'name' => 'type',
-            'label' => 'User Type',
-            'type' => 'text',
-            'value' => function($entry) {
-                switch ($entry->type) {
-                    case '1':
-                        return 'Superadmin';
-                    case '2':
-                        return 'Admin';
-                    case '3':
-                        return 'User';
-                    default:
-                        return 'Unknown';
-                }
-            },
-        ]);
+                'name' => 'type_label',
+                'label' => 'User Type',
+                'type' => 'text',
+            ]);
+
+        // Remove the default 'type' field if the user is not a superadmin.
+        if (!backpack_auth()->user()->isSuperAdmin()) {
+            CRUD::removeColumn('type_label');
+        }
+
+        // Remove the default type column added by setFromDb(), to add the custom type column
+        CRUD::removeColumn('type');
 
         // Adding the column Created_at
         CRUD::addColumn([
@@ -166,5 +156,4 @@ class UserCrudController extends CrudController
             'type' => 'datetime',
         ]);
     }
-
 }
