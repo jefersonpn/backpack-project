@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // Register the TenantSwitcher middleware
+        $middleware->web([\App\Http\Middleware\TenantSwitcher::class]);
+
+        // You can add other middleware here
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
