@@ -10,12 +10,13 @@ use Illuminate\Support\Facades\Artisan;
 
 class MigrateTenants extends Command
 {
-    protected $signature = 'migrate:tenants';
+    protected $signature = 'migrate:tenants {operation=migrate}';
 
-    protected $description = 'Run migrations for all tenant databases';
+    protected $description = 'Run migrations, rollback or refresh for all tenant databases';
 
     public function handle()
     {
+        $operation = $this->argument('operation');
         $tenants = Tenant::all();
 
         foreach ($tenants as $tenant) {
@@ -36,13 +37,33 @@ class MigrateTenants extends Command
             DB::purge('tenant');  // Clear existing tenant connection
             DB::reconnect('tenant');  // Reconnect to the tenant's database
 
-            // Run migrations for the tenant's database
-            Artisan::call('migrate', [
-                '--database' => 'tenant',
-                '--force' => true,  // Ensure there are no confirmation prompts
-            ]);
+            // Determine the operation to run
+            switch ($operation) {
+                case 'rollback':
+                    Artisan::call('migrate:rollback', [
+                        '--database' => 'tenant',
+                        '--force' => true,  // Ensure there are no confirmation prompts
+                    ]);
+                    $this->info("Rolled back migrations for tenant: {$tenant->domain}");
+                    break;
 
-            $this->info("Migrations run for tenant: {$tenant->domain}");
+                case 'refresh':
+                    Artisan::call('migrate:refresh', [
+                        '--database' => 'tenant',
+                        '--force' => true,  // Ensure there are no confirmation prompts
+                    ]);
+                    $this->info("Refreshed migrations for tenant: {$tenant->domain}");
+                    break;
+
+                case 'migrate':
+                default:
+                    Artisan::call('migrate', [
+                        '--database' => 'tenant',
+                        '--force' => true,  // Ensure there are no confirmation prompts
+                    ]);
+                    $this->info("Migrations run for tenant: {$tenant->domain}");
+                    break;
+            }
         }
     }
 }

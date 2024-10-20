@@ -64,3 +64,15 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+##
+To renew the database just run:
+
+<!-- Reset all rolling back the database -->
+php artisan migrate:tenant rollback  
+
+<!-- Migrate the first database -->
+php artisan migrate
+
+<!-- Seed all database -->
+php artisan db:seed --class=TenantSeeder

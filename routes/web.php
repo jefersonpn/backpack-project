@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\ProfileController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [HomeController::class, 'index'])->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

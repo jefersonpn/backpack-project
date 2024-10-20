@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('db_host')->default('mysql-backpack'); // Database host
             $table->string('db_user');           // Database username
             $table->string('db_password');       // Database password
+            $table->string('logo')->nullable();  // Tenant's logo
             $table->timestamps();
         });
     }
