@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
             $table->string('domain')->unique();  // Domain to identify the tenant
-            $table->string('db_name');           // Tenant's database name
-            $table->string('db_host')->default('mysql-backpack'); // Database host
-            $table->string('db_user');           // Database username
-            $table->string('db_password');       // Database password
+            $table->string('name');           // Owner of the tenant
+            $table->string('lastname');       // Owner's last name
+            $table->string('email')->unique();  // Tenant's email
+            $table->foreignId('address_id')->constrained('addresses')->nullable(); // Address id
+            $table->json('phones');       // Phones
             $table->string('logo')->nullable();  // Tenant's logo
+            $table->string('cnpj')->nullable();  // Tenant's CNPJ
+            $table->string('iva')->nullable();  // Tenant's IVA
             $table->timestamps();
         });
     }
