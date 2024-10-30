@@ -18,6 +18,6 @@ class Address extends Model
 
     public function clinic()
     {
-        return $this->hasOne(Clinic::class);
+        return $this->hasMany(Clinic::class);
     }
 }

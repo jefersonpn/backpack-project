@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UsersSeeder;
+use Database\Seeders\TenantSeeder;
 use Database\Seeders\StatesTableSeed;
 use Database\Seeders\RegionsTableSeed;
 use Database\Seeders\CitiesTableSeeder;
@@ -24,7 +25,8 @@ class DatabaseSeeder extends Seeder
             RegionsTableSeed::class,
             ProvincesTableSeeder::class,
             CitiesTableSeeder::class,
-            UsersSeeder::class
+            UsersTableSeeder::class,
+            TenantTableSeeder::class,
         ]);
     }
 }

@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
-class UsersSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -22,6 +22,7 @@ class UsersSeeder extends Seeder
                 'lastname' => 'Nascimento',
                 'password' =>  Hash::make('Intellp4'),
                 'phone' => '3517659040',
+                'type' => '1',
                 'email_verified_at' => now(),
             ]
         );

@@ -22,7 +22,7 @@
                             ->ribbon(['top', 'la-user'])
                             ->progressClass('progress-bar')
                             ->value($userCount)
-                            ->description( __('labels.registered_users') )
+                            ->description( trans('labels.registered_users') )
                             //->progress((100 * (int) 239) / 1000)
                             //->hint(1000 - 239 . ' more until next milestone.'),
                     ]);

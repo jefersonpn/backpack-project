@@ -13,15 +13,12 @@ return new class extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
-            $table->string('domain')->unique();  // Domain to identify the tenant
-            $table->string('name');           // Owner of the tenant
-            $table->string('lastname');       // Owner's last name
-            $table->string('email')->unique();  // Tenant's email
-            $table->foreignId('address_id')->constrained('addresses')->nullable(); // Address id
-            $table->json('phones');       // Phones
-            $table->string('logo')->nullable();  // Tenant's logo
-            $table->string('cnpj')->nullable();  // Tenant's CNPJ
-            $table->string('iva')->nullable();  // Tenant's IVA
+            $table->string('name')->nullable();           // Owner of the tenant
+            $table->string('lastname')->nullable();       // Owner's last name
+            $table->string('email')->unique()->nullable();  // Tenant's email
+            $table->json('phones')->nullable();        // Tenant's phones
+            $table->foreignId('address_id')->nullable()->constrained('addresses')->nullOnDelete(); // Address id
+            $table->foreignId('clinic_id')->nullable()->constrained('clinics')->nullOnDelete(); // Clinic id            $table->json('phones')->nullable();  // Phones
             $table->timestamps();
         });
     }
