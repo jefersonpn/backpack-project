@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('clinics', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('address_id')->constrained('addresses')->onDelete('cascade');
-            $table->string('doctor_name');
-            $table->string('doctor_surname');
-            $table->string('logo');
-            $table->string('header_img');
-            $table->json('colors');
+            $table->string('ragione_sociale')->nullable();
+            $table->string('name')->nullable();
+            $table->foreignId('address_id')->constrained('addresses')->nullable();
+            $table->json('doctors')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('header_img')->nullable();
+            $table->json('colors')->nullable();
             $table->string('cnpj')->nullable();
             $table->string('iva')->nullable();
             $table->timestamps();
